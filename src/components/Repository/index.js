@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import getRealm from '~/services/realm';
 
+import RespositorySchema from '~/schemas/RepositorySchema';
+
 import {
   Container,
   Header,
@@ -20,14 +22,7 @@ import {
   RefreshText,
 } from './styles';
 
-async function handleDeleteRepository(repository) {
-  const realm = await getRealm();
-  realm.write(() => {
-    realm.delete(repository);
-  });
-}
-
-export default function Repository({ data, onRefresh }) {
+export default function Repository({ data, onRefresh, onDelete }) {
   return (
     <Container>
       <Header>
@@ -36,7 +31,7 @@ export default function Repository({ data, onRefresh }) {
 
           <Author>{data.login}</Author>
         </LinkAction>
-        <Delete onPress={() => handleDeleteRepository(data.id)}>
+        <Delete onPress={onDelete}>
           <Icon name="remove" size={28} color="#ff7272" />
         </Delete>
       </Header>

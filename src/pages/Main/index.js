@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import realm from 'realm';
 
 import api from '~/services/api';
 import getRealm from '~/services/realm';
@@ -52,7 +53,7 @@ export default function Main() {
     return data;
   }
 
-  async function handleAddRepository() {
+  async function handleAddRepository(repository) {
     try {
       const response = await api.get(`/repos/${input}`);
 
@@ -76,6 +77,11 @@ export default function Main() {
     );
   }
 
+  async function handleDeleteRepository(repository) {
+    console.log(repository);
+
+    await realm.write(realm.delete(repository));
+  }
   return (
     <Container>
       <Title>Agenda de repositórios</Title>
@@ -102,6 +108,7 @@ export default function Main() {
           <Repository
             data={item}
             onRefresh={() => handleRefreshRepository(item)}
+            onDelete={() => handleDeleteRepository(item.id)}
           />
         )}
       />
