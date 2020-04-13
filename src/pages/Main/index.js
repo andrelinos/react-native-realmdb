@@ -77,15 +77,15 @@ export default function Main() {
   }
 
   async function handleDeleteRepository(repository) {
-    console.log(repository);
     const realm = await getRealm();
 
-    console.log(`Consolde LOG ${realm}`);
+    console.log(`Consolde LOG ${repository}`);
 
     realm.write(() => {
       realm.delete(realm.objects(repository));
     });
   }
+
   return (
     <Container>
       <Title>Agenda de repositórios</Title>
