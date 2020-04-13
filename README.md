@@ -1,6 +1,6 @@
 # Projeto com REALM
 
- <img src="https://github.com/andrelinos/react-native-realmdb/blob/master/printscree.png" alt="Andrelino Silva">
+ <img src="https://github.com/andrelinos/react-native-realmdb/blob/master/printscreen.png" alt="Andrelino Silva">
 
 ## Com base no template e vídeo da rocketseat
 
