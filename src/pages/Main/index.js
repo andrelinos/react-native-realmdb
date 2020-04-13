@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import realm from 'realm';
 
 import api from '~/services/api';
 import getRealm from '~/services/realm';
@@ -79,8 +78,13 @@ export default function Main() {
 
   async function handleDeleteRepository(repository) {
     console.log(repository);
+    const realm = await getRealm();
 
-    await realm.write(realm.delete(repository));
+    console.log(`Consolde LOG ${realm}`);
+
+    realm.write(() => {
+      realm.delete(realm.objects(repository));
+    });
   }
   return (
     <Container>
