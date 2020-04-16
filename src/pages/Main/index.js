@@ -79,16 +79,12 @@ export default function Main() {
   async function handleDeleteRepository(repository) {
     const realm = await getRealm();
 
-    const repos = repository.id;
+    const { id } = repository;
+
+    console.log('LOG console' + repository.id);
 
     realm.write(() => {
-      realm.delete(
-        realm.objects(repositories, {
-          id: repository.id,
-        }),
-      );
-
-      // realm.delete(repositories); // Deletes all
+      realm.delete(realm.objects('Repository'), id);
     });
   }
 
