@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Realm from 'realm';
 
 import api from '~/services/api';
 import getRealm from '~/services/realm';
@@ -41,8 +42,6 @@ export default function Main() {
       watchersCount: repository.watchers_count,
     };
 
-    console.log(data);
-
     const realm = await getRealm();
 
     realm.write(() => {
@@ -79,15 +78,10 @@ export default function Main() {
   async function handleDeleteRepository(repository) {
     const realm = await getRealm();
 
-    const { id } = repository;
-
-    console.log('LOG console' + repository.id);
-
     realm.write(() => {
-      realm.delete(realm.objects('Repository'), id);
+      realm.delete(realm.objectForPrimaryKey('Repository', repository.id));
     });
   }
-
   return (
     <Container>
       <Title>Agenda de repositórios</Title>
